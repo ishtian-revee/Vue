@@ -9,8 +9,26 @@
   </head>
   <body>
     <div id="app">
+      <!-- basic interpolation -->
       <p>{{ message1 }}</p>
       <p>{{ message2 }}</p>
+
+      <!-- basic view binding -->
+      <span v-bind:title="message3">
+        Hover over me so you can see the title!
+      </span>
+      <br>
+      <!-- basic conditional statement -->
+      <span v-if="seen">
+        If true then show me.
+      </span>
+
+      <!-- basic for loops -->
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
     </div>
 
     <script src="js/index.js"></script>
