@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <title></title>
-  </head>
-  <body>
-    <div id="app">
-      <!-- basic interpolation -->
-      <p>{{ message1 }}</p>
-      <p>{{ message2 }}</p>
 
-      <!-- basic view binding -->
-      <span v-bind:title="message3">
-        Hover over me so you can see the title!
-      </span>
-      <br>
-      <!-- basic conditional statement -->
-      <span v-if="seen">
-        If true then show me.
-      </span>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title></title>
+</head>
 
-      <!-- basic for loops -->
-      <ol>
-        <li v-for="todo in todos">
-          {{ todo.text }}
-        </li>
-      </ol>
-    </div>
+<body>
+  <div id="app">
+    <!-- basic interpolation -->
+    <p>{{ message1 }}</p>
+    <p>{{ message2 }}</p>
 
-    <script src="js/index.js"></script>
-  </body>
+    <!-- basic view binding -->
+    <span v-bind:title="message3">
+      Hover over me so you can see the title!
+    </span>
+    <br>
+    <!-- basic conditional statement -->
+    <span v-if="seen">
+      If true then show me.
+    </span>
+
+    <!-- basic for loops -->
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+
+    <hr>
+
+    <!-- events using v-on directive -->
+    <p>{{ message4 }}</p>
+    <button v-on:click="reverseString">Reverse Message</button>
+
+    <!-- v-model directive for two-way binding between form input and app state -->
+    <p>{{ message5 }}</p>
+    <input v-model="message5">
+
+    <!-- creating a vue component and using it here -->
+    <ol>
+      <todo-item v-for="item in grocerylist" v-bind:todo="item" v-bind:key="item.id">
+      </todo-item>
+    </ol>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+
 </html>
