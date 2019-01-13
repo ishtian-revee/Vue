@@ -2,7 +2,9 @@
   <div class="hello">
     <div class="holder">
       <form @submit.prevent="addSkill">
-        <input type="text" placeholder="Enter a skill you have" v-model="skill">
+        <input type="text" placeholder="Enter a skill you have" v-model="skill" v-validate="'min:5'" name="skill">
+        <!-- 'errors' is an object from vee-validate library -->
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
       </form>
 
       <ul>
@@ -30,8 +32,14 @@ export default {
   },
   methods: {
     addSkill() {
-      this.skills.push({skill: this.skill})   // pushes a new skill object to the skills array
-      this.skill = '';                        // clear out the skill text area after pushing it
+      this.$validator.validateAll().then((result) => {  // this validating mechanism also provided by vee-validator
+        if(result){
+          this.skills.push({skill: this.skill})         // pushes a new skill object to the skills array
+          this.skill = '';                              // clear out the skill text area after pushing it
+        }else{
+          console.log('Mot Validated!');
+        }
+      })
     }
   }
 }
@@ -75,5 +83,13 @@ export default {
     font-size: 1.3em;
     background-color: #323333;
     color: #687F7F;
+  }
+
+  .alert {
+    background: #fdf2ce;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px;
+    margin-top: -20px;
   }
 </style>
